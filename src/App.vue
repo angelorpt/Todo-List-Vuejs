@@ -7,15 +7,21 @@
                     <input type="text" v-model="todo.description" class="form-input" placeholder="Novo todo">
                     <button class="btn btn-primary input-group-btn">Adicionar</button>
                 </div>
-                {{ todos }}
             </form>
+            <div class="todo-list">
+                <todo v-for="todo in todos" :key="todo.id" :todo="todo"></todo>
+            </div>
         </div>
     </div>
 </template> 
 
 <script>
+    import Todo from './components/Todo'
     export default {
         name: 'App',
+        components: { 
+            Todo 
+        },
         data() {
             return {
                 todos: [],
@@ -28,6 +34,7 @@
             addTodo(todo) {
                 todo.id = Date.now()
                 this.todos.push(todo);
+                this.todo = { checked: false }
             },
         },
     }
@@ -37,5 +44,9 @@
     .img-logo {
         max-width: 100px;
         margin: 0 auto;
+    }
+
+    .todo-list {
+        padding-top: 2rem;
     }
 </style>

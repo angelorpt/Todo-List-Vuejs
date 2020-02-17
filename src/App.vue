@@ -9,7 +9,7 @@
                 </div>
             </form>
             <div class="todo-list">
-                <todo v-for="todo in todos" :key="todo.id" :todo="todo" @toggle="toggleTodo"></todo>
+                <todo v-for="todo in todos" :key="todo.id" :todo="todo" @toggle="toggleTodo" @remove="removeTodo"></todo>
             </div>
         </div>
     </div>
@@ -45,6 +45,14 @@
                 }
 
             },
+            removeTodo(todo) {
+                const index = this.todos.findIndex(item => item.id === todo.id)
+
+                if (index > -1) {
+                    this.$delete(this.todos, index);
+                }
+
+            }
         },
     }
 </script>

@@ -9,7 +9,7 @@
                 </div>
             </form>
             <div class="todo-list">
-                <todo v-for="todo in todos" :key="todo.id" :todo="todo"></todo>
+                <todo v-for="todo in todos" :key="todo.id" :todo="todo" @toggle="toggleTodo"></todo>
             </div>
         </div>
     </div>
@@ -35,6 +35,15 @@
                 todo.id = Date.now()
                 this.todos.push(todo);
                 this.todo = { checked: false }
+            },
+            toggleTodo(todo) {
+                const index = this.todos.findIndex(item => item.id === todo.id)
+
+                if (index > -1) {
+                    const checked = !this.todos[index].checked
+                    this.$set(this.todos, index, {...this.todos[index], checked})
+                }
+
             },
         },
     }

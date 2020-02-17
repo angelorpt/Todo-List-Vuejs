@@ -9,18 +9,19 @@
                 </div>
             </form>
             <div class="todo-list">
-                <todo v-for="todo in todos" :key="todo.id" :todo="todo" @toggle="toggleTodo" @remove="removeTodo"></todo>
+                <todo v-for="todo in todos" :key="todo.id" :todo="todo" @toggle="toggleTodo" @remove="removeTodo">
+                </todo>
             </div>
         </div>
     </div>
-</template> 
+</template>
 
 <script>
     import Todo from './components/Todo'
     export default {
         name: 'App',
-        components: { 
-            Todo 
+        components: {
+            Todo
         },
         data() {
             return {
@@ -32,16 +33,25 @@
         },
         methods: {
             addTodo(todo) {
+                if ((todo.description == '') || todo.description == undefined) {
+                    alert('Informe a atividade');
+                    return null;
+                }
                 todo.id = Date.now()
                 this.todos.push(todo);
-                this.todo = { checked: false }
+                this.todo = {
+                    checked: false
+                }
             },
             toggleTodo(todo) {
                 const index = this.todos.findIndex(item => item.id === todo.id)
 
                 if (index > -1) {
                     const checked = !this.todos[index].checked
-                    this.$set(this.todos, index, {...this.todos[index], checked})
+                    this.$set(this.todos, index, {
+                        ...this.todos[index],
+                        checked
+                    })
                 }
 
             },

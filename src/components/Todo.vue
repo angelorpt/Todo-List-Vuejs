@@ -9,12 +9,11 @@
             <div class="tile-subtitle">{{todo.description}}</div>
         </div>
         <div class="tile-action">
-            <button class="btn btn-link" @click="$emit('toggle', todo)">
-                <span v-if="todo.checked">Desmarcar</span>
-                <span v-else>Concluído</span>
+            <button class="btn" @click="$emit('toggle', todo)" :class="(todo.checked ? 'btn-success' : 'btn-primary')">
+                <i class="icon" :class="(todo.checked ? 'icon-flag' : 'icon-check')"></i>
             </button>
-            <button class="btn btn-link" @click="$emit('remove', todo)">
-                <span class="text-error">Remover</span>
+            <button class="btn btn-error" @click="$emit('remove', todo)">
+                <i class="icon icon-cross"></i>
             </button>
         </div>
     </div>
@@ -22,11 +21,14 @@
 
 
 <script>
-export default {
-    props: {
-        'todo': {type: Object, required: true}
+    export default {
+        props: {
+            'todo': {
+                type: Object,
+                required: true
+            }
+        }
     }
-}
 </script>
 
 

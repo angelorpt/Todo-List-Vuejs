@@ -34,7 +34,7 @@
         methods: {
             addTodo(todo) {
                 if ((todo.description == '') || todo.description == undefined) {
-                    alert('Informe a atividade');
+                    alert('Informe a Tarefa');
                     return null;
                 }
                 todo.id = Date.now()
@@ -56,6 +56,10 @@
 
             },
             removeTodo(todo) {
+                if (confirm('Deseja excluir esta tarefa?') == false) {
+                    return null;
+                }
+
                 const index = this.todos.findIndex(item => item.id === todo.id)
 
                 if (index > -1) {

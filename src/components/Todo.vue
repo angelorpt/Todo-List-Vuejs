@@ -1,16 +1,18 @@
 <template>
-    <div class="tile">
+    <div class="tile" :class="{checked: todo.checked}">
         <div class="tile-icon">
             <div>
-                <i class="icon centered icon-time"></i>
+                <i class="icon centered" :class="todo.checked ? 'icon-check' : 'icon-time'"></i>
             </div>
         </div>
         <div class="tile-content">
             <div class="tile-subtitle">{{todo.description}}</div>
-            <div class="tile-subtitle">{{todo.checked}}</div>
         </div>
         <div class="tile-action">
-            <button class="btn btn-link" @click="$emit('toggle', todo)">Concluído</button>
+            <button class="btn btn-link" @click="$emit('toggle', todo)">
+                <span v-if="todo.checked">Desmarcar</span>
+                <span v-else>Concluído</span>
+            </button>
             <button class="btn btn-link" >
                 <span class="text-error">Remover</span>
             </button>
@@ -26,3 +28,11 @@ export default {
     }
 }
 </script>
+
+
+<style scoped>
+    .checked {
+        text-decoration: line-through;
+        color: lightseagreen;
+    }
+</style>
